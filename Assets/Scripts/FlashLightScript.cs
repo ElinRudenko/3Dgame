@@ -87,16 +87,36 @@ public class FlashLightScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered with: " + other.name);
-
-        if (other.gameObject.CompareTag("Battery"))
+        if (other.CompareTag("Battery"))
         {
             charge += 1.0f;
+            
+            GameEventSystem.EmitEvent(new GameEvent
+            {
+                toast = $"You knew the battery. Likhtarik charge increased to {charge:F1}",
+                type = "Battery",
+                sound = EffectsSounds.batteryCollected
+            });
             Destroy(other.gameObject);
-            //Debug.Log("Battery collected: " + charge);
-            ToasterScript.Toast($"You knew the battery. Likhtarik charge increased to {charge:F1}", 5.0f);
+            //ToasterScript.Toast($"You knew the battery. Likhtarik charge increased to {charge:F1}", 5.0f);
         }
+        else if (other.CompareTag("BatteryMoreAdd"))
+        {
+            charge += 2.5f; 
+            
+            GameEventSystem.EmitEvent(new GameEvent
+            {
+                toast = $"Super battery collected! Charge boosted to {charge:F1}",
+                type = "Battery",
+                sound = EffectsSounds.batteryCollected
+            });
+            Destroy(other.gameObject);
+            //ToasterScript.Toast($"Super battery collected! Charge boosted to {charge:F1}", 5.0f);
+        }
+
+        charge = Mathf.Clamp01(charge); 
     }
+
 
 
 }

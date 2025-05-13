@@ -3,6 +3,49 @@ using System.Collections.Generic;
 
 public class GameState
 {
+
+
+    #region bool isKeyInTime
+    public static bool isKeyInTime {get; set; }
+    #endregion
+
+    
+
+
+
+    #region bool isKeyCollected
+    private static bool _isKey1Collected = false;
+    public static bool isKey1Collected { 
+        get => _isKey1Collected;
+        set
+        {
+            if(_isKey1Collected != value)
+            {
+                _isKey1Collected = value;
+                Notify(nameof(isKey1Collected));
+            }
+
+        }
+    }
+    #endregion
+
+    #region bool isKe2yCollected
+    private static bool _isKey2Collected = true;
+    public static bool isKey2Collected { 
+        get => _isKey2Collected;
+        set
+        {
+            if(_isKey2Collected != value)
+            {
+                _isKey2Collected = value;
+                Notify(nameof(isKey2Collected));
+            }
+
+        }
+    }
+    #endregion
+
+
     #region bool isDay
     private static bool _isDay = true;
     public static bool isDay { 

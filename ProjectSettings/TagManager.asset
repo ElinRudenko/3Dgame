@@ -7,6 +7,7 @@ TagManager:
   - Night
   - Day
   - Battery
+  - BatteryMoreAdd
   layers:
   - Default
   - TransparentFX

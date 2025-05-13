@@ -75,13 +75,35 @@ public class LightScript : MonoBehaviour
     {
         if (!GameState.isDay)
         {
+        
             foreach (Light light in nightLights)
             {
-                light.intensity = GameState.isFpv ? 0.0f : (light.type == LightType.Point ? 5.0f : 1.0f);
-                light.enabled = !GameState.isFpv;
+                light.enabled = false;
+            }
+
+            if (GameState.isFpv)
+            {
+            
+                RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+                RenderSettings.ambientLight = Color.black;
+                RenderSettings.ambientIntensity = 0f;
+                RenderSettings.reflectionIntensity = 0f;
+
+                DynamicGI.UpdateEnvironment(); 
+            }
+            else
+            {
+                RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
+                RenderSettings.ambientLight = Color.white;
+                RenderSettings.ambientIntensity = 1f;
+                RenderSettings.reflectionIntensity = 1f;
+                
+
+                DynamicGI.UpdateEnvironment();
             }
         }
     }
+
 
     private void OnGameStateChange(string fieldName)
     {
