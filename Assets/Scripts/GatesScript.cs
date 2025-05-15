@@ -34,6 +34,8 @@ public class GatesScript : MonoBehaviour
         if (soundCount >= 2) openingSound2 = openingSounds[1];
 
         GameEventSystem.Subscribe(OnGameEvent);
+        GameState.AddListener(OnGameStateChange);
+        //OnGameStateChange(null);
     }
 
     void Update()
@@ -55,6 +57,19 @@ public class GatesScript : MonoBehaviour
 
                 if (openingSound2 != null && openingSound2.isPlaying)
                     openingSound2.Stop();
+            }
+        }
+
+        if(openingSound1.isPlaying || openingSound2.isPlaying)
+        {
+            openingSound1.volume = openingSound2.volume = Time.timeScale == 0.0f ? 0.0f : GameState.effectsVolume;
+            if(Time.timeScale == 0.0f)
+            {
+                openingSound1.volume = openingSound2.volume = 0.0f;
+            }
+            else
+            {
+
             }
         }
     }
@@ -121,8 +136,19 @@ public class GatesScript : MonoBehaviour
         }
     }
 
+    private void OnGameStateChange(string fieldName)
+    {
+        if (fieldName == nameof(GameState.effectsVolume))
+        {
+            if(openingSound1 != null) openingSound1.volume = GameState.effectsVolume;
+            if(openingSound2 != null) openingSound2.volume = GameState.effectsVolume;
+
+        }
+    }
+
     private void OnDestroy()
     {
         GameEventSystem.Unsubscribe(OnGameEvent);
+        GameState.RemoveListener(OnGameStateChange);
     }
 }

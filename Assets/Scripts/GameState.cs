@@ -5,6 +5,47 @@ public class GameState
 {
 
 
+
+
+
+    #region float effectsVolume
+    private static float _effectsVolume = 0.07f;
+    public static float effectsVolume { 
+        get => _effectsVolume;
+        set
+        {
+            if(_effectsVolume != value)
+            {
+                _effectsVolume = value;
+                Notify(nameof(effectsVolume));
+            }
+
+        }
+    }
+    #endregion
+
+
+    #region float musicVolume
+    private static float _musicVolume = 0.006f;
+    public static float musicVolume { 
+        get => _musicVolume;
+        set
+        {
+            if(_musicVolume != value)
+            {
+                _musicVolume = value;
+                Notify(nameof(musicVolume));
+            }
+
+        }
+    }
+    #endregion
+
+
+
+
+
+
     #region bool isKeyInTime
     public static bool isKeyInTime {get; set; }
     #endregion
@@ -84,10 +125,11 @@ public class GameState
 
     public static void AddListener(Action<string> listener)
     {
-        if (listener != null && !listeners.Contains(listener))
-        {
+        //if (listener != null && !listeners.Contains(listener))
+        //{
             listeners.Add(listener);
-        }
+            listener(null);
+        //}
     }
 
     public static void RemoveListener(Action<string> listener)

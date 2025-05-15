@@ -69,6 +69,9 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
+
+        if (MenuScript.isPaused) return;
+
         if (isFixed)
         {
             this.transform.position = fixedCameraPosition.position;
@@ -134,7 +137,7 @@ public class CameraScript : MonoBehaviour
                                           Quaternion.Euler(angleX - angleX0, angleY - angleY0, 0f) * offset;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 Application.Quit();
 #if UNITY_EDITOR
