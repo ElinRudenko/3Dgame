@@ -49,7 +49,8 @@ public class KeyScript : MonoBehaviour
     {
         if (other.name == "Player") // ← заменено!
         {
-            Debug.Log("Key collected. Sending event...");
+            GameState.bag.Add($"Key{keyNumber}", 1);
+            //Debug.Log("Key collected. Sending event...");
 
             GameEventSystem.EmitEvent(new GameEvent
             {

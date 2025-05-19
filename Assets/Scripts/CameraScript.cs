@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+
+    
     [SerializeField] private Transform cameraAnchor;
 
     private float angleY;

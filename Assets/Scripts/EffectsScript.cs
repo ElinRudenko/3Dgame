@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class EffectsScript : MonoBehaviour
 {
+    private static EffectsScript instance;
+
     private AudioSource keyCollectedInTime;
     private AudioSource keyCollectedOutOfTime;
-
     private AudioSource batteryCollectedSound;
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); 
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject); 
+    }
+    
     void Start()
     {
         AudioSource[] audioSources = GetComponents<AudioSource>();
@@ -24,9 +38,9 @@ public class EffectsScript : MonoBehaviour
     private void OnGameEvent(GameEvent gameEvent)
     {
 
-        if (gameEvent.sound != null )
+        if (gameEvent.sound != null)
         {
-            switch(gameEvent.sound)
+            switch (gameEvent.sound)
             {
                 case EffectsSounds.batteryCollected: batteryCollectedSound.Play(); break;
                 case EffectsSounds.keyCollectedOutOfTime: keyCollectedOutOfTime.Play(); break;

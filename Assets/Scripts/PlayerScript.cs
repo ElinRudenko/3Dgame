@@ -7,9 +7,30 @@ public class PlayerScript : MonoBehaviour
 {
     private Rigidbody rb;
 
+    private static PlayerScript prevInstance = null;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        if (prevInstance != null)
+        {
+            //this.rb.velocity = prevInstance.rb.velocity;
+            //this.rb.angularVelocity = prevInstance.rb.angularVelocity;
+            //GameObject.Destroy(prevInstance.gameObject);
+
+            GameObject.Destroy(this.gameObject);
+            //Debug.Log("Destroy");
+
+        }
+        else
+        {
+            
+        }
+        prevInstance = this;
+
+       
     }
 
     void Update()

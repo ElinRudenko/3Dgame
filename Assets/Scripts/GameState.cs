@@ -4,17 +4,51 @@ using System.Collections.Generic;
 public class GameState
 {
 
+    public static Dictionary<string, int> bag { get; } = new Dictionary<string, int>();
+
+    #region float gatesVolume
+    private static float _gatesVolume = 0.07f;
+    public static float gatesVolume
+    {
+        get => _gatesVolume;
+        set
+        {
+            if (_gatesVolume != value)
+            {
+                _gatesVolume = value;
+                Notify(nameof(gatesVolume));
+            }
+        }
+    }
+    #endregion
 
 
+    #region float longEffectsVolume
+    private static float _longEffectsVolume = 0.1f;
+    public static float longEffectsVolume
+    {
+        get => _longEffectsVolume;
+        set
+        {
+            if (_longEffectsVolume != value)
+            {
+                _longEffectsVolume = value;
+                Notify(nameof(longEffectsVolume));
+            }
+
+        }
+    }
+    #endregion
 
 
     #region float effectsVolume
     private static float _effectsVolume = 0.07f;
-    public static float effectsVolume { 
+    public static float effectsVolume
+    {
         get => _effectsVolume;
         set
         {
-            if(_effectsVolume != value)
+            if (_effectsVolume != value)
             {
                 _effectsVolume = value;
                 Notify(nameof(effectsVolume));
@@ -27,11 +61,12 @@ public class GameState
 
     #region float musicVolume
     private static float _musicVolume = 0.006f;
-    public static float musicVolume { 
+    public static float musicVolume
+    {
         get => _musicVolume;
         set
         {
-            if(_musicVolume != value)
+            if (_musicVolume != value)
             {
                 _musicVolume = value;
                 Notify(nameof(musicVolume));
@@ -47,20 +82,21 @@ public class GameState
 
 
     #region bool isKeyInTime
-    public static bool isKeyInTime {get; set; }
+    public static bool isKeyInTime { get; set; }
     #endregion
 
-    
+
 
 
 
     #region bool isKeyCollected
     private static bool _isKey1Collected = false;
-    public static bool isKey1Collected { 
+    public static bool isKey1Collected
+    {
         get => _isKey1Collected;
         set
         {
-            if(_isKey1Collected != value)
+            if (_isKey1Collected != value)
             {
                 _isKey1Collected = value;
                 Notify(nameof(isKey1Collected));
@@ -71,12 +107,13 @@ public class GameState
     #endregion
 
     #region bool isKe2yCollected
-    private static bool _isKey2Collected = true;
-    public static bool isKey2Collected { 
+    private static bool _isKey2Collected = false;
+    public static bool isKey2Collected
+    {
         get => _isKey2Collected;
         set
         {
-            if(_isKey2Collected != value)
+            if (_isKey2Collected != value)
             {
                 _isKey2Collected = value;
                 Notify(nameof(isKey2Collected));
@@ -89,11 +126,12 @@ public class GameState
 
     #region bool isDay
     private static bool _isDay = true;
-    public static bool isDay { 
+    public static bool isDay
+    {
         get => _isDay;
         set
         {
-            if(_isDay != value)
+            if (_isDay != value)
             {
                 _isDay = value;
                 Notify(nameof(isDay));
@@ -105,11 +143,12 @@ public class GameState
 
     #region bool isFpv
     private static bool _isFpv = true;
-    public static bool isFpv { 
+    public static bool isFpv
+    {
         get => _isFpv;
         set
         {
-            if(_isFpv != value)
+            if (_isFpv != value)
             {
                 _isFpv = value;
                 Notify(nameof(isFpv));
@@ -127,8 +166,8 @@ public class GameState
     {
         //if (listener != null && !listeners.Contains(listener))
         //{
-            listeners.Add(listener);
-            listener(null);
+        listeners.Add(listener);
+        listener(null);
         //}
     }
 
@@ -148,4 +187,7 @@ public class GameState
         }
     }
     #endregion
+    
+
+    
 }
